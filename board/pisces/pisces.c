@@ -62,12 +62,18 @@ void board_early_init(void)
 	gpio_init();
 }
 
+#define GPIO_POWER_IND_N (32 * 1 + 30)
+static void init_green_led_pin(void)
+{
+    __gpio_as_output0(GPIO_POWER_IND_N);
+}
 
 //----------------------------------------------------------------------
 // U-Boot common routines
 
 int checkboard (void)
 {
+	init_green_led_pin();
 	DECLARE_GLOBAL_DATA_PTR;
 
 	printf("Board: Ingenic Pisces (CPU Speed %d MHz)\n",
